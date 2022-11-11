@@ -13,7 +13,8 @@ module.exports = {
       host: process.env.MYSQL_DEV_HOST,
       user: process.env.MYSQL_DEV_USER,
       password : process.env.MYSQL_DEV_PASSWORD,
-      database: process.env.MYSQL_DEV_DATABASE
+      database: process.env.MYSQL_DEV_DATABASE,
+
     },
     migrations: {
       directory: "./migrations"

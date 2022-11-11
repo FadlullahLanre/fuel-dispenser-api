@@ -28,6 +28,13 @@ const deposit = async (user, deposit) => {
     return user
 }
 
+
+const GetAllUser = async () => {
+    const users = await db.select('card_id', 'email', 'balance', 'phoneNumber').from('users')
+    return users
+}
+
 module.exports = {
-    deposit
+    deposit,
+    GetAllUser
 }

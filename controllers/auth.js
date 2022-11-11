@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const sigupValidator = require('../validator/signUp')
 const AppError = require('../utils/appError')
 const loginValidator = require('../validator/login')
+const adminValidator = require('../validator/admin')
 const { promisify } = require('util')
 const bycrpt = require('bcrypt')
 
@@ -43,6 +44,25 @@ const signup = async (req, res, next) => {
 
 }
 
+const adminSignup = async (req, res, next) => {
+    try {
+        const value = await adminValidator.validateAsync(req.body)
+        value.password = await bycrpt.hash(value.password, 12)
+
+        await db('admin').insert({
+            email: value.email,
+            password: value.password,
+            phoneNumber : value.phoneNumber,
+            role: value.role
+        })
+        const newAdmin = await db.select().from("admin").where({ email: value.email })
+        createToken(newAdmin, 201, res)
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 const login = async (req, res, next) => {
     try {
         const value = await loginValidator.validateAsync(req.body)
@@ -61,6 +81,25 @@ const login = async (req, res, next) => {
     }
 
 }
+
+const adminLogin = async (req, res, next) => {
+    try {
+        const value = await loginValidator.validateAsync(req.body)
+        if (!value.password || !value.email) {
+            throw new AppError("Please provide an email and password", 400)
+        }
+        
+        const admin = await db.select().from('admin').where({ email: value.email })
+        if (!admin || !await bycrpt.compare(value.password, admin[0].password)) {
+            throw new AppError('incorrect password or email', 401)
+        }
+        createToken(admin, 200, res)
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 
 const protect = async (req, res, next) => {
     try {
@@ -88,5 +127,7 @@ const protect = async (req, res, next) => {
 module.exports = {
     signup,
     protect,
-    login
+    login,
+    adminLogin,
+    adminSignup
 }

@@ -6,7 +6,7 @@ const AppError = require('./utils/appError');
 // const helmet = require('helmet');
 // const rateLimit = require('express-rate-limit');
 const userRouter = require('./routes/user');
-//const paymentRouter = require('./routes/transaction');
+const paymentRouter = require('./routes/transaction');
 const errorController = require('./utils/errorController');
 const app = express();
 dotenv.config();
@@ -33,7 +33,7 @@ console.log(process.env.NODE_ENV)
 // // Data sanitization against xss(html code attack)
 // app.use(xss());
 
-app.use('/v1/pump', userRouter);
+app.use('/v1/pump', userRouter, paymentRouter );
 app.get('/v1/pump', function (req, res) {
 	res.send({ message : 'Welcome to the Fuel Dispenser Api!, '});
   
