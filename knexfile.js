@@ -28,11 +28,11 @@ module.exports = {
   staging: {
     client: 'mysql2',
     connection: {
-      host: 'db4free.net',
-      database: 'pump_database',
-      user: 'fadlulanre',
-      password: 'fadlullah',
-      port: 3306
+      host: process.env.MYSQL_STA_HOST,
+      user: process.env.MYSQL_STA_USER,
+      password: process.env.MYSQL_STA_PASSWORD,
+      database: process.env.MYSQL_STA_DATABASE,
+      port : 3306
     },   
     pool: {
       min: 1,
