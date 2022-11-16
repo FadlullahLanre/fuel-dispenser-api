@@ -24,22 +24,20 @@ module.exports = {
     }
   },
 
-
-  staging: {
-    client: 'mysql2',
+  testing: {
+    client: 'mysql',
     connection: {
-      host: process.env.MYSQL_STA_HOST,
-      user: process.env.MYSQL_STA_USER,
-      password: process.env.MYSQL_STA_PASSWORD,
-      database: process.env.MYSQL_STA_DATABASE,
-      port : 3306
-    },   
-    pool: {
-      min: 1,
-      max: 10,
+      host: process.env.MYSQL_TES_HOST ,
+      user: process.env.MYSQL_TES_USER ,
+      password: process.env.MYSQL_TES_PASSWORD,
+      database: process.env.MYSQL_TES_DATABASE,
+
     },
     migrations: {
-      directory: "./prod_migrations"
+      directory: "./testing_migrations"
+    },
+    seeds: {
+      directory: "./migrations/seeds"
     }
   },
 
