@@ -2,9 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const AppError = require('./utils/appError');
-// const xss = require('xss-clean');
-// const helmet = require('helmet');
-// const rateLimit = require('express-rate-limit');
 const userRouter = require('./routes/user');
 const paymentRouter = require('./routes/transaction');
 const errorController = require('./utils/errorController');
@@ -17,6 +14,8 @@ app.use(cors({
 
 app.use(express.json());
 console.log(process.env.NODE_ENV)
+
+
 
 //1 Global middlewares
 // Set security HTTP headers
@@ -35,13 +34,14 @@ console.log(process.env.NODE_ENV)
 
 app.use('/v1/pump', userRouter, paymentRouter );
 app.get('/v1/pump', function (req, res) {
-	res.send({ message : 'Welcome to the Fuel Dispenser Api!, '});
+	res.send({ message : 'Welcome to the Fuel Dispenser Api! '});
   
   });
 
 app.all('*', (req, res, next) => {
     next(new AppError(`Can't find ${req.originalUrl} on this server`, 400))
 });
+
 
 app.use(errorController);
 

@@ -21,6 +21,6 @@ router.route('/user/profile').get(protect, userController.getUser)
 router.route('/admin/agent').post(protect, addAgent).get(protect, userController.AllAgents)
 router.route('/user/deposit').post(protect, userController.deposit)
 
-router.get("/admin/allUsers", userController.AllUser)
+router.get("/admin/users", userController.AllUser)
 
 module.exports = router
