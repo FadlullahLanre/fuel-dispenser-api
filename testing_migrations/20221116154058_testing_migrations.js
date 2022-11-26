@@ -11,8 +11,7 @@
             table.string("password");
             table.string("email").unique();
             table.integer("balance").notNullable().defaultTo(0)
-            table.datetime('created_at');
-            table.datetime('updated_at');
+            table.timestamps(true, true)
 
         })
         .createTable("transactions", table => {
@@ -22,8 +21,7 @@
             table.decimal("amount");
             table.string("description")
             table.decimal("balance")
-            table.datetime('created_at');
-            table.datetime('updated_at');
+            table.timestamps(true, true)
 
         })
         .createTable("admin", function (table) {

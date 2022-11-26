@@ -29,7 +29,7 @@ const signup = async (req, res, next) => {
     try {
         const value = await sigupValidator.validateAsync(req.body)
         value.password = await bycrpt.hash(value.password, 12)
-
+   
         await db('users').insert({
             card_id: value.card_id,
             email: value.email,
@@ -108,7 +108,7 @@ const protect = async (req, res, next) => {
             token = req.headers.authorization.split(' ')[1]
         }
         if (!token) {
-            return next(new AppError('You are not login, Please login to get access', 401))
+            return next(new AppError('You are not logged in, Please login to get access', 401))
         }
         let decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
 

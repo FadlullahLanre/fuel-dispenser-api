@@ -17,7 +17,7 @@ const addAgent = async (agent) => {
 
 
 const GetAllAgents = async () => {
-    const agents = await db.select('location', 'email', 'agent_name', 'hotline').from('agents    ')
+    const agents = await db.select('location', 'email', 'agent_name', 'hotline', 'status').from('agents')
     return agents
 }
 
