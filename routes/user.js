@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../controllers/user')
-const {addAgent} = require('../controllers/admin')
+const { addAgent } = require('../controllers/admin')
 
 const {
     signup,
@@ -17,9 +17,9 @@ router.post('/admin/signup', adminSignup)
 router.post('/admin/login', adminLogin)
 
 
-router.route('/user/profile').get(protect, userController.getUser)
-router.route('/admin/agent').post(protect, addAgent).get(protect, userController.AllAgents)
-router.route('/user/deposit').post(protect, userController.deposit)
+router.route('/user/profile').get( userController.getUser)
+router.route('/admin/agent').post(addAgent).get(userController.AllAgents)
+router.route('/user/deposit').post(userController.deposit)
 
 router.get("/admin/users", userController.AllUser)
 
