@@ -5,7 +5,7 @@ const {GetAllAgents} = require('../services/adminService')
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = await getUser(req.params.id)
+        const user = await getUser(req.params.card_id)
         res.status(200).json({
             status: "successful",
             data: {
@@ -26,7 +26,6 @@ exports.deposit = async (req, res, next) => {
                 user
             }
         })
-
     } catch (error) {
         next(error)
     }

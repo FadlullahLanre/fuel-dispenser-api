@@ -18,7 +18,7 @@ router.post('/admin/signup', adminSignup)
 router.post('/admin/login', adminLogin)
 
 
-router.route('/user/profile/:id').get( userController.getUser)
+router.route('/user/profile/:card_id').get( userController.getUser)
 router.route('/admin/agent').post(addAgent).get(userController.AllAgents)
 router.route('/user/deposit').post(userController.deposit)
 

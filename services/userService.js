@@ -34,8 +34,11 @@ const GetAllUser = async () => {
     return users
 }
 
-const getUser = async (value) => {
-    const singleUser = await db.select().from('users').where({id: value})
+const getUser = async (value, res) => {
+    const singleUser = await db.select('card_id', 'balance', 'email').from('users').where({card_id: value})
+    if (!singleUser) {
+        return res.status(404).send("user doesn't exist")
+    }
     return singleUser
 }
 module.exports = {
