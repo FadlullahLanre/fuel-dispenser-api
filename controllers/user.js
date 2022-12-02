@@ -1,11 +1,11 @@
 const AppError = require('../utils/appError')
 const db = require('../config/connect')
-const { deposit, GetAllUser} = require('../services/userService')
+const { deposit, GetAllUser,getUser} = require('../services/userService')
 const {GetAllAgents} = require('../services/adminService')
 
 exports.getUser = async (req, res, next) => {
     try {
-        const user = req.user
+        const user = await getUser(req.params.id)
         res.status(200).json({
             status: "successful",
             data: {

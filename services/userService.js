@@ -34,7 +34,12 @@ const GetAllUser = async () => {
     return users
 }
 
+const getUser = async (value) => {
+    const singleUser = await db.select().from('users').where({id: value})
+    return singleUser
+}
 module.exports = {
     deposit,
-    GetAllUser
+    GetAllUser,
+    getUser
 }
