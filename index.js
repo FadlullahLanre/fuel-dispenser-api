@@ -16,7 +16,6 @@ app.use(express.json());
 console.log(process.env.NODE_ENV)
 
 
-
 //1 Global middlewares
 // Set security HTTP headers
 // app.use(helmet());
