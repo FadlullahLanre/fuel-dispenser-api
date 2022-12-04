@@ -12,7 +12,7 @@ const deposit = async (value, deposit) => {
     if (deposit < 1) {
         throw new AppError("You cannot deposit a negative amount", 401)
     }
-    singleUser[0].balance -= deposit
+    singleUser[0].balance = deposit
 
     await db('users').where({ card_id: value}).update({
         balance: singleUser[0].balance
