@@ -4,6 +4,6 @@ const paymentController = require('../controllers/transaction')
 
 const router = express.Router()
 
-router.route('/transactions/account-statement').get(paymentController.Account_statement)
+router.route('/transactions/account-statement').get(authController.protect, paymentController.Account_statement)
 
 module.exports = router

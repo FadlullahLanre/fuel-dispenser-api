@@ -1,6 +1,6 @@
 const AppError = require('../utils/appError')
 const db = require('../config/connect')
-const { deposit, GetAllUser, getUser } = require('../services/userService')
+const { deposit, GetAllUser, getUser, depositFunds } = require('../services/userService')
 const { GetAllAgents } = require('../services/adminService')
 
 exports.getUser = async (req, res, next) => {
@@ -12,10 +12,39 @@ exports.getUser = async (req, res, next) => {
     }
 }
 
+exports.getCustomer = async (req, res, next) => {
+    try {
+        const user = req.user
+        res.status(200).json({
+            status: "successful",
+            data: {
+                user
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
 exports.deposit = async (req, res, next) => {
     try {
         const user = await deposit(req.params.card_id, +req.params.deposit)
         res.status(200).json( user )
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.depositFunds = async (req, res, next) => {
+    try {
+        const user = await depositFunds(req.user, req.body.deposit)
+        res.status(200).json({
+            status: "successful",
+            data: {
+                user
+            }
+        })
+
     } catch (error) {
         next(error)
     }
