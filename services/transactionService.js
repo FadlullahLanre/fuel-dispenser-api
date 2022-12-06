@@ -4,7 +4,7 @@ const db = require('../config/connect');
 
 const Account_statement = async (value) => {
     const Account = await db.select().from('transactions').where({
-         user_id: value
+         card_id: value
     })
 
     if (!Account) {
