@@ -50,6 +50,7 @@ const depositFunds = async (user, deposit) => {
         user_id: user[0].id,
         card_id: user[0].card_id,
         amount: deposit,
+        created_at: Date(),
         description: "Deposit",
         balance: user[0].balance
     })
