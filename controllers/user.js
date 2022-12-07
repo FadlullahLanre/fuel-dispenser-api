@@ -29,7 +29,7 @@ exports.getCustomer = async (req, res, next) => {
 exports.deposit = async (req, res, next) => {
     try {
         const user = await deposit(req.params.card_id, +req.params.deposit)
-        res.status(200).json( user )
+        res.status(200).send({user})
     } catch (error) {
         next(error)
     }
