@@ -6,7 +6,7 @@ const { GetAllAgents } = require('../services/adminService')
 exports.getUser = async (req, res, next) => {
     try {
         const user = await getUser(req.params.card_id)
-        res.status(200).send(user)
+        res.status(200).json(user[0])
     } catch (error) {
         next(error)
     }
@@ -29,7 +29,7 @@ exports.getCustomer = async (req, res, next) => {
 exports.deposit = async (req, res, next) => {
     try {
         const user = await deposit(req.params.card_id, +req.params.deposit)
-        res.status(200).send({user})
+        res.status(200).json(user[0])
     } catch (error) {
         next(error)
     }

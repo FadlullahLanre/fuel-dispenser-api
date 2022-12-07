@@ -27,7 +27,7 @@ const deposit = async (value, deposit) => {
         description: "Deposit",
         balance: singleUser[0].balance
     })
-    return singleUser
+    return (singleUser)
 }
 
 const depositFunds = async (user, deposit) => {
