@@ -45,12 +45,15 @@ const depositFunds = async (user, deposit) => {
     })
     user[0].password = undefined
     user[0].pin = undefined
-    
+
+    const newDate = Date.now()
+    const newDate2 = new Date(newDate)
+
     await db('transactions').insert({
         user_id: user[0].id,
         card_id: user[0].card_id,
         amount: deposit,
-        created_at: now(),
+        created_at: newDate2,
         description: "Deposit",
         balance: user[0].balance
     })
