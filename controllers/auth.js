@@ -29,11 +29,16 @@ const signup = async (req, res, next) => {
     try {
         const value = await sigupValidator.validateAsync(req.body)
         value.password = await bycrpt.hash(value.password, 12)
-   
+
+        const newDate = Date.now()
+        const newDate2 = new Date(newDate)
+
         await db('users').insert({
             card_id: value.card_id,
             email: value.email,
             password: value.password,
+            created_at: newDate2,
+            updated_at: newDate2,
             phoneNumber : value.phoneNumber
         })
         const newUser = await db.select().from("users").where({ email: value.email })
